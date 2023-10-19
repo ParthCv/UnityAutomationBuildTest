@@ -3,7 +3,10 @@ name: Test project
 on: [push, pull_request]
 
 jobs:
+                
+
   testAllModes:
+            
     name: Test in ${{ matrix.testMode }}
     runs-on: ubuntu-latest
     strategy:
@@ -14,6 +17,8 @@ jobs:
           - editmode
           - standalone
     steps:
+      - name: Unity - Activate
+        uses: game-ci/unity-activate@v2.0.0
       - uses: actions/checkout@v2
         with:
           lfs: true
