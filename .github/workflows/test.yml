@@ -1,59 +1,54 @@
 name: Actions 😎
 
-  
-
 on:
 
-pull_request: {}
+  pull_request: {}
 
-push: { branches: [main] }
+  push: { branches: [main] }
 
   
 
 env:
 
-UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
   
 
 jobs:
 
-readmeWorkflow:
+  readmeWorkflow:
 
-name: Readme Workflow ✨
+    name: Readme Workflow ✨
 
-runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-steps:
+    steps:
+    # Checkout
 
-# Checkout
+      - name: Checkout repository
 
-- name: Checkout repository
+        uses: actions/checkout@v2
 
-uses: actions/checkout@v2
-
-  
 
 # Build
 
-- name: Build project
+      - name: Build project
 
-uses: webbertakken/unity-builder@v0.10
+        uses: webbertakken/unity-builder@v0.10
 
-with:
+        with:
 
-unityVersion: 2022.3.0f1
+          unityVersion: 2022.3.0f1
 
-targetPlatform: Android
+          targetPlatform: PC
 
   
 
 # Output
+      - uses: actions/upload-artifact@v1
 
-- uses: actions/upload-artifact@v1
+        with:
 
-with:
+          name: Build
 
-name: Build
-
-path: build
+          path: build
