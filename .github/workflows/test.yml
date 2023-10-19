@@ -1,0 +1,59 @@
+name: Actions 😎
+
+  
+
+on:
+
+pull_request: {}
+
+push: { branches: [main] }
+
+  
+
+env:
+
+UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+
+  
+
+jobs:
+
+readmeWorkflow:
+
+name: Readme Workflow ✨
+
+runs-on: ubuntu-latest
+
+steps:
+
+# Checkout
+
+- name: Checkout repository
+
+uses: actions/checkout@v2
+
+  
+
+# Build
+
+- name: Build project
+
+uses: webbertakken/unity-builder@v0.10
+
+with:
+
+unityVersion: 2022.3.0f1
+
+targetPlatform: Android
+
+  
+
+# Output
+
+- uses: actions/upload-artifact@v1
+
+with:
+
+name: Build
+
+path: build
