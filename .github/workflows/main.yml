@@ -17,6 +17,8 @@ jobs:
           - editmode
           - standalone
     steps:
+      - name: Unity - Activate
+        uses: game-ci/unity-activate@v2.0.0
       - uses: actions/checkout@v2
         with:
           lfs: true
@@ -34,7 +36,7 @@ jobs:
           projectPath: ${{ matrix.projectPath }}
           testMode: ${{ matrix.testMode }}
           artifactsPath: ${{ matrix.testMode }}-artifacts
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          githubToken: ${{ secrets.TOKEN }}
           checkName: ${{ matrix.testMode }} Test Results
           coverageOptions: 'generateAdditionalMetrics;generateHtmlReport;generateBadgeReport;assemblyFilters:+my.assembly.*'
       - uses: actions/upload-artifact@v2
